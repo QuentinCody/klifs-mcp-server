@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
+const tools = read("src/tools/code-mode.ts");
+for (const token of ["createSearchTool", "createExecuteTool", "createQueryDataHandler", "createGetSchemaHandler", "klifsResponse", "`mcp_${String(name)}`", "source: KLIFS_SOURCE"]) assert.ok(tools.includes(token), token);
+const response = read("src/lib/tool-result.ts");
+for (const token of ["structuredContent", "content:", "isError: true", "shouldStage", "stageToDoAndRespond", "_staging", "100_000", "data: undefined"]) assert.ok(response.includes(token), token);
+const wrangler = JSON.parse(read("wrangler.jsonc"));
+assert.equal(wrangler.alias.ai, "./src/ai-stub.ts");
+assert.ok(wrangler.compatibility_flags.includes("nodejs_compat"));
+assert.deepEqual(wrangler.durable_objects.bindings, [{ name: "KLIFS_DATA_DO", class_name: "KlifsDataDO" }]);
+assert.ok(read("src/index.ts").includes("registerResources"));
+console.log("KLIFS structural response contract checks passed; run behavioral .test.ts suites and live verify-server separately.");
