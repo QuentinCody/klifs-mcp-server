@@ -13,7 +13,7 @@ function parameterValue(name: string, value: unknown, array: boolean): string {
   return values.map(item => {
     if (typeof item !== "string" && typeof item !== "number") fail(`${name}: expected string or number`);
     const text = String(item).trim();
-    if (!text || text.length > 100 || /[\r\n\x00,]/.test(text)) fail(`${name}: invalid value`);
+    if (!text || text.length > 100 || /[\r\n,]/.test(text) || text.includes("\0")) fail(`${name}: invalid value`);
     if (name.endsWith("_ID") && (!/^[1-9]\d*$/.test(text) || !Number.isSafeInteger(Number(text)))) fail(`${name}: expected positive integer ID`);
     if (name === "pdb-codes" && !/^[A-Za-z0-9]{4}$/.test(text)) fail("pdb-codes: expected four-character PDB code");
     if (name === "species" && !/^(HUMAN|MOUSE)$/i.test(text)) fail("species: use HUMAN or MOUSE");

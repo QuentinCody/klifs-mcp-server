@@ -96,3 +96,13 @@ Drift risk is medium; review the published Swagger monthly. Refresh the supporte
 catalog, bounds and examples after upstream changes, then repeat the probes and
 contract tests. Promote to a committed resolved OpenAPI/hybrid artifact if broader
 endpoint coverage is needed; keep the explicit safe route/parameter boundary.
+
+<!-- license-and-data-terms:start -->
+## License and data terms
+
+The code in this repository is licensed under the Apache License 2.0 (see `LICENSE`).
+If you use it in your work, please cite it (see `CITATION.cff`). Citation is requested, not required.
+
+The license covers the code only. Data that this server returns comes from KLIFS and stays under the terms of that source: FAQ: all data freely available for academia and industry; no formal license; redistribution not addressed; includes ChEMBL and PKIDB data.
+You are responsible for your use of the data under those terms.
+<!-- license-and-data-terms:end -->
